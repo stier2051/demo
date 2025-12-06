@@ -10,4 +10,4 @@ spring:
     port: ${RABBIT_PORT:5672}
     username: ${RABBIT_USERNAME:guest}
     password: ${RABBIT_PASSWORD:guest}
-    virtual-host: ${RABBIT_VIRTUAL_HOST:/demo/1}
+    virtual-host: ${RABBIT_VIRTUAL_HOST:demo/1}
