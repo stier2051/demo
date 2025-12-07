@@ -13,7 +13,7 @@ public class MessageQueueConfig {
     public static final String PROCESS_MESSAGE_QUEUE = "process-message-q";
 
     @Bean
-    DirectExchange sendMessageExchange() {
+    public DirectExchange sendMessageExchange() {
         return new DirectExchange(SEND_MESSAGE_EXCHANGE);
     }
 
@@ -25,7 +25,7 @@ public class MessageQueueConfig {
     }
 
     @Bean
-    Binding sendMessageBinding(Queue sendMessageQueue, DirectExchange sendMessageExchange) {
+    public Binding sendMessageBinding(Queue sendMessageQueue, DirectExchange sendMessageExchange) {
         return BindingBuilder
                 .bind(sendMessageQueue)
                 .to(sendMessageExchange)
@@ -33,14 +33,14 @@ public class MessageQueueConfig {
     }
 
     @Bean
-    Queue processMessageQueue() {
+    public Queue processMessageQueue() {
         return QueueBuilder
                 .durable(PROCESS_MESSAGE_QUEUE)
                 .build();
     }
 
     @Bean
-    Binding processMessageBinding(Queue processMessageQueue, DirectExchange sendMessageExchange) {
+    public Binding processMessageBinding(Queue processMessageQueue, DirectExchange sendMessageExchange) {
         return BindingBuilder
                 .bind(processMessageQueue)
                 .to(sendMessageExchange)
