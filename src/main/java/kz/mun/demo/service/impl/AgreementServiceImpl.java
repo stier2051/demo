@@ -20,8 +20,6 @@ public class AgreementServiceImpl implements AgreementService {
 
     @Override
     public void sendAgreementGenerate(UUID agreementId, Locale locale) {
-
-
         log.info("Sending agreement generate request, locale = {}", locale.getLanguage());
         rabbitTemplate.convertAndSend(AGREEMENT_EVENTS_EXCHANGE, "agreement.generate." + locale.getLanguage(), agreementId);
     }
