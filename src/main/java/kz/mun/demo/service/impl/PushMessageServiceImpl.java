@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static kz.mun.demo.config.MessageQueueConfig.MESSAGE_EVENTS_ROUTING_KEY;
-import static kz.mun.demo.config.MessageQueueConfig.SEND_MESSAGE_EXCHANGE;
+import static kz.mun.demo.config.MessageQueueConfig.*;
 
 @Service
 @Slf4j
@@ -31,6 +30,6 @@ public class PushMessageServiceImpl implements PushMessageService {
                 .messageBody("test body")
                 .contact(contact)
                 .build();
-        rabbitTemplate.convertAndSend(SEND_MESSAGE_EXCHANGE, MESSAGE_EVENTS_ROUTING_KEY, pushMessage);
+        rabbitTemplate.convertAndSend(SEND_MESSAGE_EXCHANGE, SEND_MESSAGE_ROUTING_KEY, pushMessage);
     }
 }
