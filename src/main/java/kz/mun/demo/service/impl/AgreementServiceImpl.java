@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Locale;
 import java.util.UUID;
 
-import static kz.mun.demo.config.AgreementQueueConfig.AGREEMENT_EVENTS_EXCHANGE;
+import static kz.mun.demo.config.DocumentsEventQueueConfig.DOCUMENTS_EVENTS_EXCHANGE;
 
 @Service
 @Slf4j
@@ -21,6 +21,12 @@ public class AgreementServiceImpl implements AgreementService {
     @Override
     public void sendAgreementGenerate(UUID agreementId, Locale locale) {
         log.info("Sending agreement generate request, locale = {}", locale.getLanguage());
-        rabbitTemplate.convertAndSend(AGREEMENT_EVENTS_EXCHANGE, "agreement.generate." + locale.getLanguage(), agreementId);
+        rabbitTemplate.convertAndSend(DOCUMENTS_EVENTS_EXCHANGE, "agreement.generate." + locale.getLanguage(), agreementId);
+    }
+
+    @Override
+    public void sendProtocolGenerate(UUID agreementId, Locale locale) {
+        log.info("Sending protocol generate request, locale = {}", locale.getLanguage());
+        rabbitTemplate.convertAndSend(DOCUMENTS_EVENTS_EXCHANGE, "protocol.generate." + locale.getLanguage(), agreementId);
     }
 }
