@@ -25,6 +25,8 @@ public class AgreementQueueConfig {
     public static final String AGREEMENT_GENERATE_EN_QUEUE = "agreement-generate-en-queue";
     public static final String AGREEMENT_GENERATE_DE_QUEUE = "agreement-generate-de-queue";
 
+    public static final String AGREEMENT_GENERATE_ALL_LOCALES_QUEUE = "agreement-generate-all-locales-queue";
+
     public static final String AGREEMENT_EDIT_KZ_QUEUE = "agreement-edit-kz-queue";
     public static final String AGREEMENT_EDIT_EN_QUEUE = "agreement-edit-en-queue";
     public static final String AGREEMENT_EDIT_DE_QUEUE = "agreement-edit-de-queue";
@@ -56,6 +58,13 @@ public class AgreementQueueConfig {
     }
 
     @Bean
+    public Queue agreementGenerateAllLocalesQueue() {
+        return QueueBuilder
+                .durable(AGREEMENT_GENERATE_ALL_LOCALES_QUEUE)
+                .build();
+    }
+
+    @Bean
     public Binding agreementGenerateKzBinding(Queue agreementGenerateKzQueue, TopicExchange agreementExchange) {
         return BindingBuilder
                 .bind(agreementGenerateKzQueue)
@@ -76,6 +85,14 @@ public class AgreementQueueConfig {
         return BindingBuilder
                 .bind(agreementGenerateDeQueue)
                 .to(agreementExchange)
-                .with("agreement.generate.de#");
+                .with("agreement.generate.de.#");
+    }
+
+    @Bean
+    public Binding agreementGenerateAllLocalesBinding(Queue agreementGenerateAllLocalesQueue, TopicExchange agreementExchange) {
+        return BindingBuilder
+                .bind(agreementGenerateAllLocalesQueue)
+                .to(agreementExchange)
+                .with("agreement.generate.#");
     }
 }

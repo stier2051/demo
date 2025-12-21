@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static kz.mun.demo.config.AgreementQueueConfig.AGREEMENT_GENERATE_EN_QUEUE;
-import static kz.mun.demo.config.AgreementQueueConfig.AGREEMENT_GENERATE_KZ_QUEUE;
+import static kz.mun.demo.config.AgreementQueueConfig.*;
 
 @Service
 @Slf4j
@@ -23,5 +22,15 @@ public class AgreementListener {
     @RabbitListener(queues = AGREEMENT_GENERATE_EN_QUEUE)
     public void sendAgreementGenerateEnQueue(UUID agreementId) {
         log.info("Agreement generate en: {}", agreementId);
+    }
+
+    @RabbitListener(queues = AGREEMENT_GENERATE_DE_QUEUE)
+    public void sendAgreementGenerateDeQueue(UUID agreementId) {
+        log.info("Agreement generate de: {}", agreementId);
+    }
+
+    @RabbitListener(queues = AGREEMENT_GENERATE_ALL_LOCALES_QUEUE)
+    public void sendAgreementGenerateAllLocalesQueue(UUID agreementId) {
+        log.info("Agreement generate all locales: {}", agreementId);
     }
 }
