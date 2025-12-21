@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static kz.mun.demo.config.AgreementQueueConfig.*;
+import static kz.mun.demo.config.DocumentsEventQueueConfig.*;
 
 @Service
 @Slf4j
