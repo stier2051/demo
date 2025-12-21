@@ -25,9 +25,9 @@ public class AgreementQueueConfig {
     public static final String AGREEMENT_GENERATE_EN_QUEUE = "agreement-generate-en-queue";
     public static final String AGREEMENT_GENERATE_DE_QUEUE = "agreement-generate-de-queue";
 
-    public static final String AGREEMENT_GENERATE_ROUTING_KEY = "agreement.generate.#";
-
     public static final String AGREEMENT_EDIT_KZ_QUEUE = "agreement-edit-kz-queue";
+    public static final String AGREEMENT_EDIT_EN_QUEUE = "agreement-edit-en-queue";
+    public static final String AGREEMENT_EDIT_DE_QUEUE = "agreement-edit-de-queue";
 
     @Bean
     public TopicExchange agreementExchange() {
@@ -60,7 +60,7 @@ public class AgreementQueueConfig {
         return BindingBuilder
                 .bind(agreementGenerateKzQueue)
                 .to(agreementExchange)
-                .with(AGREEMENT_GENERATE_ROUTING_KEY);
+                .with("agreement.generate.kz.#");
     }
 
     @Bean
@@ -68,7 +68,7 @@ public class AgreementQueueConfig {
         return BindingBuilder
                 .bind(agreementGenerateEnQueue)
                 .to(agreementExchange)
-                .with(AGREEMENT_GENERATE_ROUTING_KEY);
+                .with("agreement.generate.en.#");
     }
 
     @Bean
@@ -76,6 +76,6 @@ public class AgreementQueueConfig {
         return BindingBuilder
                 .bind(agreementGenerateDeQueue)
                 .to(agreementExchange)
-                .with(AGREEMENT_GENERATE_ROUTING_KEY);
+                .with("agreement.generate.de#");
     }
 }
